@@ -48,7 +48,7 @@ const JobCard = ({ job }) => {
           ))}
         </div>
         <div className="card-actions justify-end">
-            <Link to={`jobs/${_id}`}> <button className="btn btn-primary">Buy Now</button> </Link>
+            <Link to={`jobs/${_id}`}> <button className="btn btn-primary">Details</button> </Link>
          
         </div>
       </div>
