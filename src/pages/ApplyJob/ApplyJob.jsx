@@ -17,12 +17,17 @@ const ApplyJob = () => {
     const github = form.github.value;
     const rusume = form.rusume.value;
     console.log(linkedin,github,rusume);
-  };
 
-  const application = {
+    const application = {
     jobId,
     applicant: user.email,
+    rusume,
+    github,
+    linkedin,
   }
+  };
+
+
   return (
     <div>
       <h1>Apply Job</h1> 
