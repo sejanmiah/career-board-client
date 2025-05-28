@@ -22,6 +22,13 @@ const handleSignOut = () => {
       <li>
         <NavLink to="/">Home</NavLink>
       </li>
+      {
+        user && <>
+             <li>
+        <NavLink to="/myapplication">My Application</NavLink>
+      </li>
+        </>
+      }
     </>
   );
   return (
