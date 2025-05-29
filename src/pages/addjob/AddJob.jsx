@@ -4,14 +4,27 @@ import UseAuth from "../../hooks/UseAuth";
 const AddJob = () => {
     const {user} = UseAuth()
     console.log(user);
-    
+
     const handleAddJob = e => {
         e.preventDefault();
         const form = e.target;
         const formData = new FormData(form);
 
         const data = Object.fromEntries(formData.entries())
-        console.log(data);
+
+        // Process salary range data
+        const {min,max, currency, ...newJob} = data
+        newJob.salaryRange = {min,max, currency};
+        console.log(newJob);
+
+        // Process requirsment data
+        const requirsmentString = newJob.job_requirsment
+        const requirsmentDiry = requirsmentString.split(',')
+        const requirsmentClean = requirsmentDiry.map(req => req.trim())
+        newJob.job_requirsment = requirsmentClean
+
+        newJob.job_responsibility = newJob.job_responsibility.split(',').map(res => res.trim())
+        console.log(Object.keys(newJob).length);
     }
   return (
     <div>
@@ -39,9 +52,9 @@ const AddJob = () => {
 
         <div className="filter">
             <input className="btn filter-reset" type="radio" name="jobType" aria-label="All"/>
-            <input className="btn" type="radio" name="jobType" aria-label="On-Site"/>
-            <input className="btn" type="radio" name="jobType" aria-label="Remote"/>
-            <input className="btn" type="radio" name="jobType" aria-label="Hybrid"/>
+            <input className="btn" type="radio" name="jobType" value='on_site' aria-label="On-Site"/>
+            <input className="btn" type="radio" name="jobType" value='remote' aria-label="Remote"/>
+            <input className="btn" type="radio" name="jobType" value='hybrid' aria-label="Hybrid"/>
         </div>
 
         </fieldset>
@@ -62,7 +75,7 @@ const AddJob = () => {
                 <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
           <legend className="fieldset-legend">Application Deadline</legend>
 
-            <input type="date" className="input" />
+            <input type="date" name="deadline" className="input" />
 
         </fieldset>
         {/* {salary Range} */}
@@ -86,14 +99,6 @@ const AddJob = () => {
                     </select>
             </fieldset>
 
-
-        {/* {Description} */}
-                <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
-          <legend className="fieldset-legend">Basic info</legend>
-
-
-           <textarea className="textarea" name="description" placeholder="description"></textarea>
-        </fieldset>
 
         {/* {Job Requirment} */}
                 <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
