@@ -3,12 +3,16 @@ import React from "react";
 const AddJob = () => {
     const handleAddJob = e => {
         e.preventDefault();
-        
+        const form = e.target;
+        const formData = new FormData(form);
+
+        const data = Object.fromEntries(formData.entries())
+        console.log(data);
     }
   return (
     <div>
       <h1>Add Job Is here</h1>
-      <form>
+      <form onSubmit={handleAddJob}>
         <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
           <legend className="fieldset-legend">Basic info</legend>
 
@@ -77,11 +81,6 @@ const AddJob = () => {
                         <option>EUR</option>
                     </select>
             </fieldset>
-
-{/* {salary Range} */}
-        <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
-          <legend className="fieldset-legend">salary Range</legend>
-        </fieldset>
 
 
         {/* {Description} */}
