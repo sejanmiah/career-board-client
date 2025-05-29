@@ -1,6 +1,10 @@
 import React from "react";
+import UseAuth from "../../hooks/UseAuth";
 
 const AddJob = () => {
+    const {user} = UseAuth()
+    console.log(user);
+    
     const handleAddJob = e => {
         e.preventDefault();
         const form = e.target;
@@ -67,13 +71,13 @@ const AddJob = () => {
                 <legend className="fieldset-legend">salary Range</legend>
 
                 <label className="label">Salary Minimum</label>
-                <input type="text" name="salarymin" className="input" placeholder="Salary Minimum" />
+                <input type="text" name="min" className="input" placeholder="Salary Minimum" />
 
                 <label className="label">Salary Maximum</label>
-                <input type="text" name="salarymax" className="input" placeholder="Salary Maximum" />
+                <input type="text" name="max" className="input" placeholder="Salary Maximum" />
 
                 <label className="label">Currency</label>
-                    <select defaultValue="Select Currency" className="select">
+                    <select defaultValue="Select Currency" name="currency" className="select">
                         <option disabled={true}>Select Currency</option>
                         <option>BDT</option>
                         <option>AED</option>
@@ -108,6 +112,16 @@ const AddJob = () => {
              <textarea className="textarea" name="job_responsibility" placeholder="Job Responsibility"></textarea>
         </fieldset>
 
+      {/* {job Description} */}
+                <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
+          <legend className="fieldset-legend">Job Description</legend>
+
+
+           <textarea className="textarea" name="job_description" placeholder="Job Description"></textarea>
+        </fieldset>
+
+
+
         {/* {Hr} */}
          <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
           <legend className="fieldset-legend">Hr Related info</legend>
@@ -116,7 +130,7 @@ const AddJob = () => {
           <input type="text"  name="hr_name" className="input" placeholder="HR Name" />
 
           <label className="label">HR Email</label>
-          <input type="email" name="hr_email" className="input" placeholder="HR Email" />
+          <input type="email" name="hr_email" className="input" defaultValue={user.email} placeholder="HR Email" />
 
           {/* <label className="label">Company Logo</label>
           <input type="text" name="logo_logo" className="input" placeholder="Comapany Logo url" /> */}
