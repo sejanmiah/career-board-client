@@ -1,5 +1,7 @@
 import React from "react";
 import UseAuth from "../../hooks/UseAuth";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const AddJob = () => {
     const {user} = UseAuth()
@@ -24,7 +26,28 @@ const AddJob = () => {
         newJob.job_requirsment = requirsmentClean
 
         newJob.job_responsibility = newJob.job_responsibility.split(',').map(res => res.trim())
+
+        newJob.status = 'active';
+        
         console.log(Object.keys(newJob).length);
+        // Save to the DataBase
+        axios.post('http://localhost:3000/jobs', newJob)
+        .then(res => {
+            // console.log(res);
+            if(res.data.insertedId) {
+                Swal.fire({
+  position: "top-end",
+  icon: "success",
+  title: "Your new job has been saved on database & also published",
+  showConfirmButton: false,
+  timer: 1500
+});
+            }
+        })
+        .catch(error => {
+            console.log(error);
+        })
+
     }
   return (
     <div>

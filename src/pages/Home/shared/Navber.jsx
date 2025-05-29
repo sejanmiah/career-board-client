@@ -33,6 +33,7 @@ const handleSignOut = () => {
         user &&  <>
             <li>
                 <NavLink to="/addjob">Add Job</NavLink>
+                <NavLink to="/mypostedjob">My Posted Job</NavLink>
           </li>
         </>
       }
