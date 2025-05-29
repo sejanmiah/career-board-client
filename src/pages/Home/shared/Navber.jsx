@@ -29,6 +29,13 @@ const handleSignOut = () => {
       </li>
         </>
       }
+      {
+        user &&  <>
+            <li>
+                <NavLink to="/addjob">Add Job</NavLink>
+          </li>
+        </>
+      }
     </>
   );
   return (
